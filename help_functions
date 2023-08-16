@@ -1,0 +1,23 @@
+import numpy as np 
+import math 
+
+def get_x_and_y(x): 
+    x_pos = np.zeros(len(x)) 
+    y_pos = np.zeros(len(x)) 
+    for i in range(len(x)):
+        x_pos[i] = x[i][0]
+        y_pos[i] = x[i][1]
+    return (x_pos, y_pos) 
+
+def sum_2(x,y): 
+    return (x[0] + y[0], x[1] + y[1])
+
+def step(t): 
+    return (np.random.normal(0,math.sqrt(t)), np.random.normal(0,math.sqrt(t)))
+
+def dist(x,y): 
+    return (x[0]-y[0])**2 + (x[1] - y[1])**2 
+
+def calc_barycenter(x): 
+    [x_pos, y_pos] = get_x_and_y(x) 
+    return [np.mean(x_pos), np.mean(y_pos)] 
