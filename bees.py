@@ -4,6 +4,9 @@ import math
 from sklearn.cluster import KMeans
 from collections import Counter 
 
+
+
+# I can separate the function that does one simulation and in this function only make a call to that function for each simulation 
 def bees_2(num_particles, num_steps, num_simulations):
     all_particles = [0 for _ in range(num_simulations)]
     for l in range(num_simulations): 
