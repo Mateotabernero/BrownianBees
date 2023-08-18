@@ -1,6 +1,8 @@
 import numpy as np 
 import math 
 
+
+# Esto realmente no hace falta si usamos numpy arrays. Lo puedo cambiar
 def get_x_and_y(x): 
     x_pos = np.zeros(len(x)) 
     y_pos = np.zeros(len(x)) 
