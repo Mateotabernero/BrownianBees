@@ -2,40 +2,36 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import math  
 
-def one_bees(num_particles, num_steps):
+def bees_3(num_particles, num_steps):
     t = 0 
-    times = [0 for _ in range(num_particles)]
-    times_to = np.random.exponential(scale = 1, size = num_particles)
-    for i in range(num_particles):
-        times[i] = times_to[i]
-    particles =  [[0,0] for _ in range(num_particles)]
-    barycenter = [0.0] 
-    dist_from_barycenter = [0 for _ in range(num_particles)]
-    
+    times = np.random.exponential(scale = 1, size = num_particles)
+    particles  =  np.zeros((num_particles, 2))
+    barycenter =  np.zeros(2) 
+
     for w in range(num_steps): 
         j = np.argmin(times) 
         new_t = times[j]
         
-        for i in range(len(particles)):
-            particles[i] = sum_2(particles[i], step(new_t-t)) 
+        particles = [p + step(new_t-t) for p in particles]  
         
-        barycenter = calc_barycenter(particles) 
-        dist_from_barycenter = np.zeros(len(particles)) 
-        for i in range(len(particles)):
-            dist_from_barycenter[i] = dist(particles[i], barycenter) 
-        
+
+        barycenter = np.mean(particles, axis = 0) 
+        dist_from_barycenter = np.linalg.norm(particles - barycenter) 
+
         new_particle = particles[j] 
         
-        k = np.argmin(dist_from_barycenter)
+        j = np.argmin(dist_from_barycenter)
         new_time = new_t + np.random.exponential(scale = 1) 
-        times[k] =  new_t + np.random.exponential(scale = 1) 
+        times[j] =  new_t + np.random.exponential(scale = 1) 
+
+        particles= np.vstack((particles, new_particle[np.newaxis, :])) 
+        times = np.append(times, new_time) 
+
+        j = np.argmin(dist_from_barycenter) 
+        times = np.delete(times, j, axis = 0) 
         
-        particles.append(new_particle) 
-        times.append(new_time) 
-        
-        k = np.argmin(dist_from_barycenter) 
-        del times[k]
-        del particles[k]
+        particles = np.delete(particles, j, axis = 0 ) 
+
         
     return particles 
 
