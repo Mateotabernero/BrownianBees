@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import math  
 
-def bees_3(num_particles, num_steps):
+def bees(num_particles, num_steps):
     t = 0 
     times = np.random.exponential(scale = 1, size = num_particles)
     particles  =  np.zeros((num_particles, 2))
