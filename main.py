@@ -72,7 +72,7 @@ def evolution_bees(num_particles, num_steps, num_simulations):
     return particles_e
 
 # I can separate the function that does one simulation and in this function only make a call to that function for each simulation 
-def bees(num_particles, num_steps, num_simulations):
+def all_bees(num_particles, num_steps, num_simulations):
     all_particles = [0 for _ in range(num_simulations)]
     for l in range(num_simulations): 
         all_particles[l] = one_bees(num_particles, num_steps) 
